@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* General Reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f1f4f8;
+  color: #333;
+  line-height: 1.6;
+  height: 100vh; /* Make the body take full height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Form Styling */
+form {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  width: 50%;
+  max-width: 800px;
+  min-width: 350px;
+  transition: all 0.3s ease;
+  margin: 0 auto; /* Centering the form horizontally */
+}
+
+form:hover {
+  transform: scale(1.02);
+}
+
+form label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Input Styling */
+form input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 2px solid #ced4da;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #f8f9fa;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+form input:focus {
+  border-color: #007bff;
+  outline: none;
+  background-color: #fff;
+}
+
+/* Button Styling */
+button {
+  width: 48%;
+  padding: 12px 20px;
+  margin-top: 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+button[type="button"] {
+  background-color: #dc3545;
+  color: #fff;
+  margin-left: 4%;
+}
+
+button[type="button"]:hover {
+  background-color: #c82333;
+}
+
+/* Modal Button (if you need to style the modal trigger) */
+[data-bs-toggle="modal"] {
+  text-align: center;
+  display: inline-block;
+}
+
+/* Hover Effects for Inputs */
+form input:hover {
+  border-color: #007bff;
+}
+
+/* Hover Effects for Buttons */
+button:hover {
+  opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  body {
+    padding: 20px; /* Add padding on smaller screens */
+  }
+
+  form {
+    width: 100%;
+    padding: 20px;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  button[type="button"] {
+    margin-left: 0;
+  }
+}
+
+/* Fullscreen Form Adjustment */
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f8f9fa; /* Soft background for the full screen */
+}
+
+form {
+  width: 50%;
+  height: auto;
+  min-width: 300px;
+  margin: 0;
+  padding: 30px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+button[type="submit"], button[type="button"] {
+  animation: bounce 0.8s infinite;
+}
+
+/* Animation for Bouncing */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+    </style>
+
+</head>
+<body>
+    <form  method="post" action="/admin/editUser/<%= arr._id %>?_method=PUT">
+
+        <div class="col-md-6">
+          <label>Name:</label>
+          <input
+            type="text"
+            value="<%= arr.fullName %>"
+            name="fullName"
+          />
+        </div>
+        
+        <div>
+          <label>Email:</label>
+          <input
+            type="email"
+            value="<%= arr.email  %>"
+            name="email"
+
+          />
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">
+              Update changes
+            </button>
+
+
+          <button
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            type="button"
+            class="btn btn-danger"
+          >
+            Delete Customer
+          </button>
+        </div>
+      </form>
+
+</body>
+</html>

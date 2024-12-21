@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Product Details">
+  <title>Product Details</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 15px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #007bff;
+    }
+
+    p {
+      margin: 15px 0;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    strong {
+      color: #555;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 15px;
+      font-size: 1rem;
+      color: white;
+      background-color: #007bff;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+    }
+
+    .btn-danger:hover {
+      background-color: #c82333;
+    }
+
+    .btn-secondary {
+      background-color: #6c757d;
+    }
+
+    .btn-secondary:hover {
+      background-color: #5a6268;
+    }
+
+    .button-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    /* Header Styles */
+    .header {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .welcome-message {
+      font-size: 1rem;
+      margin-top: 5px;
+      color: #ffd700;
+    }
+
+    .header nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    .header nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    .header nav a:hover {
+      color: #ffd700;
+    }
+
+    .header .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header .search-bar input {
+      padding: 5px;
+      font-size: 1rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      p {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo-container">
+      <div class="logo">E-Commerce</div>
+      <div class="welcome-message">Welcome,</div>
+    </div>
+
+    <nav>
+      <a href="/product">Home</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/user/viewCart" class="cart">Cart</a>
+    </nav>
+
+    <div class="search-bar">
+      <input type="text" placeholder="Search products...">
+      <button class="btn">Search</button>
+    </div>
+  </header>
+
+  <!-- Product Details Section -->
+<div class="container">
+  <h1>Product Details</h1>
+
+  <p><strong>Product Name:</strong> <%= productItem.product.name %></p>
+  <p><strong>Quantity:</strong> <%= productItem.quantity %></p>
+  <p><strong>Price:</strong> $<%= productItem.price.toString() %></p>
+  <p><strong>Total:</strong> $<%= (productItem.quantity * productItem.price).toFixed(2) %></p>
+
+  <div class="button-container">
+    <!-- Button to decrease quantity -->
+    <form method="POST" action="/user/updateQuantity/<%= order._id %>/<%= productItem._id %>?_method=PUT" style="display: inline;">
+      <button type="submit" class="btn btn-secondary">Remove 1 Quantity</button>
+    </form>
+
+    <!-- Button to remove the product -->
+    <form method="POST" action="/user/removeProduct/<%= order._id %>/<%= productItem._id %>?_method=DELETE" style="display: inline;">
+      <button type="submit" class="btn btn-danger">Remove Product</button>
+    </form>
+
+    <!-- Back to Cart -->
+    <a href="/user/viewCart" class="btn" style="display: inline;">Back to Cart</a>
+  </div>
+</div>
+</body>
+</html>

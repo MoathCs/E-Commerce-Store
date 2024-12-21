@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Browse our products">
+  <title>Product Listing</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+
+    /* Header Styles */
+    .header {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .welcome-message {
+      font-size: 1rem;
+      margin-top: 5px;
+      color: #ffd700; /* Golden color */
+    }
+
+    .header nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    .header nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    .header nav a:hover {
+      color: #ffd700;
+    }
+
+    .header .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header .search-bar input {
+      padding: 5px;
+      font-size: 1rem;
+    }
+
+    .header .cart {
+      position: relative;
+      font-size: 1.2rem;
+    }
+
+    .header .cart span {
+      background-color: #dc3545;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 0.8rem;
+      position: absolute;
+      top: -5px;
+      right: -10px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #007bff;
+    }
+
+    .alert {
+      margin: 10px auto;
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: bold;
+      max-width: 600px;
+    }
+
+    .alert.success {
+      background-color: #d4edda;
+      color: #155724;
+    }
+
+    .alert.error {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .product-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .product-details {
+      padding: 15px;
+    }
+
+    .product-name {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .product-description {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    .product-price {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #007bff;
+      margin-bottom: 10px;
+    }
+
+    .product-stock {
+      font-size: 0.9rem;
+      color: #28a745;
+    }
+
+    .product-stock.out-of-stock {
+      color: #dc3545;
+    }
+
+    .category {
+      font-size: 0.9rem;
+      font-style: italic;
+      color: #555;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 15px;
+      font-size: 1rem;
+      color: white;
+      background-color: #007bff;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+
+    @media (max-width: 768px) {
+      .product-image {
+        height: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo-container">
+      <div class="logo">E-Commerce</div>
+      <div class="welcome-message">Welcome, <%= userName %></div>
+    </div>
+
+    <nav>
+      <a href="/product">Home</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/user/viewCart" class="cart">Cart</a>
+    </nav>
+
+    <div class="search-bar">
+      <input type="text" placeholder="Search products...">
+      <button class="btn">Search</button>
+      <a href="/logout">Logout</a>
+    </div>
+  </header>
+
+  <!-- Feedback Message -->
+  <% if (message) { %>
+    <div class="alert <%= messageType === 'success' ? 'success' : 'error' %>">
+      <%= message %>
+    </div>
+  <% } %>
+
+  <!-- Product List -->
+  <div class="container">
+    <h1>Our Products</h1>
+    
+    <div class="products-grid">
+      <% products.forEach(product => { %>
+        <div class="product-card">
+          <img src="<%= product.image %>" alt="<%= product.name %>" class="product-image">
+          <div class="product-details">
+            <h2 class="product-name"><%= product.name %></h2>
+            <p class="product-description"><%= product.description %></p>
+            <p class="product-price">$<%= product.price.toString() %></p>
+            <p class="product-stock <%= product.stock === 0 ? 'out-of-stock' : '' %>">
+              <%= product.stock === 0 ? 'Out of Stock' : `In Stock: ${product.stock}` %>
+            </p>
+            <p class="category">Category: <%= product.category %></p>
+            <form action="/user/addToCart/<%= product.id %>" method="POST" style="text-align: center;">
+              <input type="number" name="quantity" value="1" min="1" style="width: 50px; text-align: center;" <%= product.stock === 0 ? 'disabled' : '' %>>
+              <button type="submit" class="btn" <%= product.stock === 0 ? 'disabled' : '' %>>Add to Cart</button>
+            </form>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</body>
+</html>

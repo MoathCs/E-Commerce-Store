@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add New Product</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, textarea, select, button {
+      margin-top: 8px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Add New Product</h1>
+    <form action="/admin/addProduct" method="POST">
+      <!-- Product Name -->
+      <label for="name">Product Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter product name" required>
+
+      <!-- Description -->
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="4" placeholder="Enter product description" required></textarea>
+
+      <!-- Price -->
+      <label for="price">Price</label>
+      <input type="number" step="0.01" id="price" name="price" placeholder="Enter price (e.g., 19.99)" required>
+
+      <!-- Stock -->
+      <label for="stock">Stock</label>
+      <input type="number" id="stock" name="stock" placeholder="Enter stock quantity" required>
+
+      <!-- Category -->
+      <label for="category">Category</label>
+      <select id="category" name="category" required>
+        <option value="">Select Category</option>
+        <option value="electronics">Electronics</option>
+        <option value="fashion">Fashion</option>
+        <option value="books">Books</option>
+        <option value="home">Home</option>
+        <!-- Add more categories as needed -->
+      </select>
+
+      <!-- Image URL -->
+      <label for="image">Image URL</label>
+      <input type="url" id="image" name="image" placeholder="Enter image URL (e.g., https://example.com/image.jpg)" required>
+
+      <!-- Submit Button -->
+      <button type="submit">Add Product</button>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="/styles/admin.css">
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      min-height: 100vh;
+      background-color: #f4f4f4;
+    }
+
+    /* Admin Container */
+    .admin-container {
+      display: flex;
+      width: 100%;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 250px;
+      background-color: #333;
+      color: white;
+      position: fixed;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px 0;
+    }
+
+    .sidebar h2 {
+      color: #f39c12;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .sidebar nav a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      padding: 15px 20px;
+      margin: 10px 0;
+      border-radius: 4px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .sidebar nav a:hover {
+      background-color: #f39c12;
+      color: black;
+    }
+
+    .sidebar .logout {
+      margin-top: auto;
+      background-color: #f03939;
+      text-align: center;
+      padding: 15px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .sidebar .logout:hover {
+      background-color: #d93232;
+    }
+
+    /* Main Content Section */
+    .content {
+      margin-left: 250px;
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header Section */
+    header {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      color: #333;
+    }
+
+    header p {
+      font-size: 14px;
+      color: #666;
+    }
+
+    /* Dashboard Section */
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card h3 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 24px;
+      color: #f39c12;
+      margin: 0;
+    }
+
+    /* Footer Section */
+    footer {
+      text-align: center;
+      background-color: #333;
+      color: white;
+      padding: 10px 0;
+      margin-top: auto;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+
+      .content {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div>
+        <h2>Admin Panel</h2>
+        <nav>
+          <a href="/admin/userManagement">Users</a>
+          <a href="/admin/productManagement">Products</a>
+          <a href="/admin/addProduct">Add Product</a>
+          <a class="logout" href="/logout" style="color: white; text-decoration: none;">Logout</a>
+    
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+      <!-- Header Section -->
+      <header>
+        <h1>Welcome, Admin!</h1>
+        <p>Here you can manage all platform activities, including users, products, and orders.</p>
+      </header>
+
+      <!-- Dashboard Section -->
+      <section class="dashboard">
+        <div class="card">
+          <h3>Total Users</h3>
+          <p><%= userCount %></p>
+        </div>
+        <div class="card">
+          <h3>Total Products</h3>
+          <p><%= proCount %></p>
+        </div>
+        <div class="card">
+          <h3>Orders Processed</h3>
+          <p>320</p>
+        </div>
+        <div class="card">
+          <h3>Pending Tickets</h3>
+          <p>12</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Footer -->
+</body>
+</html>
